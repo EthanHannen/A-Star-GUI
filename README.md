@@ -1,4 +1,6 @@
+----------------
 Non-parametric A* Algorithm by Ethan Hannen
+----------------
 
 ----------------
 Overview
