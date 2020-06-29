@@ -1,0 +1,222 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NonParametricAStar"
+        x:Class="NonParametricAStar.MainWindow"
+        mc:Ignorable="d"
+        Title="A* Search" Height="700" Width="1300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/Background.png"/>
+        </Grid.Background>
+
+        <!-- _________________________
+             Containers 
+             Identifiers: BG | G_Map | G_Path | G_Data 
+             Methods: 
+             _________________________ -->
+        <Canvas x:Name="BG" Height="540" Width="800" Margin="0050,040,0,0" Opacity="0.85">
+            <!-- State Space Background -->
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
+
+        <Grid x:Name="G_Shapes" Height="500" Width="800" Margin="0275,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="10"/>
+        <!-- Shapes Container    -->
+        <Grid x:Name="G_Edges"  Height="500" Width="800" Margin="0275,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="10"/>
+        <!-- Edges Container     -->
+        <Grid x:Name="G_Paths"  Height="500" Width="800" Margin="0275,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="10"/>
+        <!-- Solutions Container -->
+        <Grid x:Name="G_Data"   Height="540" Width="190" Margin="1090,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black"/>
+        <!-- Metrics Container   -->
+
+        <StackPanel Height="540" Width="240" Margin="20,100,0,47" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black">
+
+            <!-- _________________________
+             Algorithm 
+             Identifiers: A1 | A2 | A3 
+             Methods: Set_Algorithm
+             _________________________ -->
+            <TextBlock Text="Algorithm" Style="{DynamicResource XW14}" Margin="20,10,0,0"/>
+            <Separator Width="200" Margin="0,2,0,2"/>
+
+            <StackPanel Margin="40,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,0,0" Style="{DynamicResource XW12}" Text="Non-Parametric A*"/>
+                    <RadioButton Name="A1" Margin="17,10,0,0" IsChecked="true" GroupName="RBA"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,0,0" Style="{DynamicResource XW12}" Text="Linear Deviation" />
+                    <RadioButton Name="A2" Margin="32,10,0,0" IsChecked="false" GroupName="RBA"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- _________________________
+             Options
+             Identifiers: CB_Show_Edges | CB_Show_Solution | SB_Num_Shapes
+             Methods: Show_Edges_Checked | Show_Edges_Unchecked | Set_Slow_Solution | Set_Num_Shapes
+             _________________________ -->
+            <TextBlock Text="Options" Style="{DynamicResource XW14}" Margin="20,15,0,0"/>
+            <Separator Width="200" Margin="0,2,0,2"/>
+
+            <StackPanel Orientation="Horizontal" Margin='40,10,0,0'>
+                <TextBlock Margin="0,0,55,0" Style="{DynamicResource XW12}" Text="Show Edges" />
+                <CheckBox x:Name="CB_Show_Edges" Checked="Show_Edges" Unchecked="Show_Edges"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin='40,10,0,0'>
+                <TextBlock Margin="0,0,47,0" Style="{DynamicResource XW12}" Text="Slow Solution" />
+                <CheckBox x:Name="CB_Slow_Solution" Checked="Set_Solution_Speed" Unchecked="Set_Solution_Speed"/>
+            </StackPanel>
+
+            <TextBlock Margin="40,10,0,0" Style="{DynamicResource XW12}" x:Name="Slider_Shapes_Head" Text="Number of Shapes [10]"/>
+            <Slider x:Name="SB_Num_Shapes" Height="18" Width="135" Margin="10,10,0,0" Minimum="10" Maximum="100" SmallChange="5"
+                 ValueChanged="Set_Num_Shapes" IsSnapToTickEnabled="True" Cursor="Hand" />
+
+            <!-- _________________________
+             Colors
+             Identifiers: sR | sG | sB
+             Methods: Set_Color
+             _________________________ -->
+            <TextBlock Margin="20,15,0,0" Style="{DynamicResource XW14}" Text="Shape Color" />
+            <Separator Width="200" Margin="0,4,0,2"/>
+
+            <StackPanel Margin="40,10,0,0">
+                <StackPanel Orientation="Horizontal" Height="20">
+                    <TextBlock Text="R" Style="{DynamicResource XW14}" Foreground="Red" Width="20"/>
+                    <Slider x:Name="sR" Height="16" Width="135" Minimum="0" Maximum="255" Value="45" SmallChange="1"
+                        ValueChanged="Set_Color" IsSnapToTickEnabled="True" Cursor="Hand"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Height="20">
+                    <TextBlock Text="G" Style="{DynamicResource XW14}" Foreground="Chartreuse" Width="20"/>
+                    <Slider x:Name="sG" Height="16" Width="135" Minimum="0" Maximum="255" Value="35" SmallChange="1"
+                        ValueChanged="Set_Color" IsSnapToTickEnabled="True" Cursor="Hand"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Height="20">
+                    <TextBlock Text="B" Style="{DynamicResource XW14}" Foreground="#FF2D23FF" Width="20"/>
+                    <Slider x:Name="sB" Height="16" Width="135" Minimum="0" Maximum="255" Value="255" SmallChange="1"
+                            ValueChanged="Set_Color" IsSnapToTickEnabled="True" Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- _________________________
+             Action Buttons
+             Identifiers: BTN_Generate | BTN_Start | BTN_Reset
+             Methods: BTN_Generate_Click | BTN_Start_Click | BTN_Reset_Click
+             _________________________ -->
+            <TextBlock Text="Actions" Style="{DynamicResource XW14}" Margin="20,15,0,0"/>
+            <Separator Width="200" Margin="0,4,0,2"/>
+
+            <Button x:Name="BTN_Generate" Style="{DynamicResource Button}" Click="Generate_Shapes" Content="Generate" >
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="Generate_Transform" X="0" Y="0"/>
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="5" Duration="00:00:.1" Storyboard.TargetName="Generate_Transform" Storyboard.TargetProperty="Y" AutoReverse="True">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BounceEase Bounces="2" EasingMode="EaseInOut" Bounciness="2" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="BTN_Start" Style="{DynamicResource Button}" Click="Find_Path" Content="Start" >
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="Start_Transform" X="0" Y="0"/>
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="5" Duration="00:00:.1" Storyboard.TargetName="Start_Transform" Storyboard.TargetProperty="Y" AutoReverse="True">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BounceEase Bounces="2" EasingMode="EaseInOut" Bounciness="2" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="BTN_Reset" Style="{DynamicResource Button}" Click="Clear_Solution" Content="Reset">
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="Reset_Transform" X="0" Y="0"/>
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0" To="5" Duration="00:00:.1" Storyboard.TargetName="Reset_Transform" Storyboard.TargetProperty="Y" AutoReverse="True">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BounceEase Bounces="2" EasingMode="EaseInOut" Bounciness="2" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackPanel>
+
+        <!-- _________________________
+         Legend
+         Identifiers: N/A
+         Methods: N/A
+         _________________________ -->
+        <StackPanel Height="20" Width="055" Margin="620,-450,0,0" Orientation="Horizontal" Panel.ZIndex="10">
+            <TextBlock Text="Start" Style="{DynamicResource XW14}"/>
+            <Ellipse  Width="10" Height="10" Margin="5,-4,0,0" Fill="Red"/>
+        </StackPanel>
+        <StackPanel Height="20" Width="050" Margin="740,-450,0,0" Orientation="Horizontal" Panel.ZIndex="10">
+            <TextBlock Text="Goal" Style="{DynamicResource XW14}"/>
+            <Ellipse  Width="10" Height="10" Margin="5,-4,0,0" Fill="Chartreuse"/>
+        </StackPanel>
+
+        <!-- _________________________
+         Text Blocks
+         Identifiers: Title | V_Error | Metrics | NumNode | NumEdge | NumOpen | Timing | T_Data | Author | Source
+         Methods: Source_MouseDown
+         _________________________ -->
+        <TextBlock Height="030" Width="308" Margin="0030,0040,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW18}" x:Name="T_Title"   Text="Non-Parametric A* Path Finding"/>
+        <TextBlock Height="020" Width="450" Margin="0290,0115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XR12}" x:Name="T_Error"   Text=""/>
+        <TextBlock Height="020" Width="100" Margin="1145,0120,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XG14}" x:Name="T_Metrics" Text="Metrics"/>
+        <TextBlock Height="020" Width="100" Margin="1105,0150,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW12}" x:Name="T_Nodes"   Text="Nodes:  "/>
+        <TextBlock Height="020" Width="100" Margin="1105,0170,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW12}" x:Name="T_Edges"   Text="Edges:  "/>
+        <TextBlock Height="020" Width="100" Margin="1146,0220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XG14}" x:Name="T_Timing"  Text="Timing"/>
+        <TextBlock Height="350" Width="150" Margin="1105,0245,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW12}" x:Name="T_Times"   Text="Test Data"/>
+        <TextBlock Height="020" Width="140" Margin="0960,0670,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW10}" x:Name="T_Author"  Text="Created by Ethan Hannen."/>
+        <TextBlock Height="020" Width="180" Margin="1100,0670,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource XW10}" x:Name="T_Source"  Text="Background designed by FreePik." 
+                   Cursor="Hand" MouseDown="Visit_Source"/>
+
+        <!-- _________________________
+         Window Controls
+         Identifiers: N/A
+         Methods: Minimize_Click | Exit_Click
+         _________________________ -->
+        <Button Height="15" Width="15" Margin="1150,10,-38,675" Style="{DynamicResource NoMouseOver}" Click="Minimize_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="../Resources/Minimize.png" Stretch="None"/>
+            </Button.Background>
+        </Button>
+        <Button Height="15" Width="15" Margin="1180,10,-62,675" Style="{DynamicResource NoMouseOver}" Click="Exit_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="../Resources/Exit.png" Stretch="None"/>
+            </Button.Background>
+        </Button>
+
+    </Grid>
+
+</Window>

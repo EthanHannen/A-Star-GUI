@@ -1,0 +1,87 @@
+﻿<Application x:Class="NonParametricAStar.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NonParametricAStar"
+             StartupUri="..\Source\MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="XW10">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="AliceBlue"/>
+            <Setter Property="TextElement.FontSize" Value="10"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="XW12">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="AliceBlue"/>
+            <Setter Property="TextElement.FontSize" Value="12"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="XW14">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="AliceBlue"/>
+            <Setter Property="TextElement.FontSize" Value="14"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="XW18">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="AliceBlue"/>
+            <Setter Property="TextElement.FontSize" Value="18"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="XG14">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="Chartreuse"/>
+            <Setter Property="TextElement.FontSize" Value="14"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="XR12">
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="Red"/>
+            <Setter Property="TextElement.FontSize" Value="12"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="TextElement.FontFamily" Value="../Resources/#Xolonium" />
+            <Setter Property="TextElement.Foreground" Value="Black"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="TextElement.FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1.0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="NoMouseOver" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1.0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>
