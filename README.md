@@ -2,7 +2,7 @@
 Non-parametric A* Algorithm by Ethan Hannen
 ----------------
 
-![alt text]("https://github.com/Avatarati/A-Star-GUI/blob/master/Screenshots/50%20Obstacles.JPG?raw=true")
+![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/50%20Obstacles.JPG)
 
 ----------------
 Overview
