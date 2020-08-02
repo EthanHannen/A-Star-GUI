@@ -1,5 +1,5 @@
 ----------------
-Non-parametric A* Algorithm by Ethan Hannen
+Non-parametric A* Algorithm
 ----------------
 
 ![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/50%20Obstacles.JPG)
