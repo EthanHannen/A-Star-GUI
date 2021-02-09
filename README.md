@@ -3,7 +3,7 @@ Non-parametric A* Algorithm
 ----------------
 
 ![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/50%20Obstacles.JPG)
-![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/Edges%20Shown.JPG)
+
 ----------------
 Overview
 ----------------
@@ -33,6 +33,8 @@ Number of nodes and edges are reported in the right pane.
 Below that, the time it took to find each solution will be reported after the algorith is finished.
 You may slow down the pathfinding by clicking the 'Slow Solution' checkbox. This allows you to see which solutions are found in a visually-comprehensible timescale.
 You can see which edges have been created by clicking the 'Show Edges' checkbox.
+
+![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/Edges%20Shown.JPG)
 
 ----------------
 Issues & To Do's
