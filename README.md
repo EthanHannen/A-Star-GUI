@@ -3,7 +3,7 @@ Non-parametric A* Algorithm
 ----------------
 
 ![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/50%20Obstacles.JPG)
-
+![alt text](https://raw.githubusercontent.com/Avatarati/A-Star-GUI/master/Screenshots/Edges%20Shown.JPG)
 ----------------
 Overview
 ----------------
